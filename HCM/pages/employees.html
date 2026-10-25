@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HCM Lite | Employee Management</title>
+
+    <!-- Shared CSS for the entire application -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body class="admin-page">
+    <div class="app-shell">
+      <!-- =========================================
+             SIDEBAR
+        ========================================== -->
+
+      <aside class="sidebar" id="admin-sidebar" aria-label="Main navigation">
+        <!-- Brand -->
+        <a href="admin.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">H</span>
+
+          <span class="brand-info">
+            <strong>HCM Lite</strong>
+            <small>Human Resources</small>
+          </span>
+        </a>
+
+        <!-- Navigation Links -->
+        <nav class="sidebar-nav">
+          <p class="nav-heading">WORKSPACE</p>
+
+          <a href="admin.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="employees.html" class="nav-link active" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">♙</span>
+            <span>Employees</span>
+          </a>
+
+          <a href="leaves.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▣</span>
+            <span>Leave Requests</span>
+          </a>
+
+          <p class="nav-heading">MANAGEMENT</p>
+
+          <a href="settings.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">⚙</span>
+            <span>Company Settings</span>
+          </a>
+
+          <a href="payslip.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            <span>Payslips</span>
+          </a>
+        </nav>
+
+        <!-- Sidebar User Profile -->
+        <div class="sidebar-footer">
+          <div class="sidebar-user">
+            <div class="user-avatar" aria-hidden="true">A</div>
+
+            <div class="user-info">
+              <strong id="sidebar-admin-name">Admin</strong>
+              <small>Administrator</small>
+            </div>
+          </div>
+
+          <button type="button" class="logout-button" id="logout-button">
+            <span aria-hidden="true">↪</span>
+            Log Out
+          </button>
+        </div>
+      </aside>
+
+      <!-- =========================================
+             MAIN CONTENT
+        ========================================== -->
+
+      <div class="app-main">
+        <!-- Topbar -->
+        <header class="topbar">
+          <div class="topbar-heading">
+            <p class="eyebrow">WORKSPACE / EMPLOYEES</p>
+
+            <h1>Employee Management</h1>
+
+            <p class="topbar-description">
+              Manage employee records and company accounts.
+            </p>
+          </div>
+
+          <div class="topbar-profile">
+            <div class="date-display">
+              <span aria-hidden="true">▦</span>
+
+              <time id="current-date"> Loading date... </time>
+            </div>
+
+            <div class="user-avatar topbar-avatar" aria-hidden="true">A</div>
+
+            <div class="topbar-user-info">
+              <strong id="admin-name">Admin</strong>
+              <small>Administrator</small>
+            </div>
+          </div>
+        </header>
+
+        <!-- =====================================
+                 PAGE CONTENT
+            ====================================== -->
+
+        <main class="dashboard-content">
+          <!-- Page Introduction -->
+          <section class="welcome-section" aria-labelledby="employees-heading">
+            <div>
+              <p class="eyebrow">PEOPLE & ORGANIZATION</p>
+
+              <h2 id="employees-heading">Manage Your Team</h2>
+
+              <p>
+                Add employees, manage their details and maintain their login
+                accounts.
+              </p>
+            </div>
+
+            <a href="#employee-form-panel" class="text-link">
+              + Add Employee
+            </a>
+          </section>
+
+          <!-- =================================
+                     EMPLOYEE SUMMARY CARDS
+                ================================== -->
+
+          <section class="stats-grid" aria-label="Employee statistics">
+            <!-- Total Employees -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon employees-icon" aria-hidden="true"
+                  >♙</span
+                >
+
+                <span class="stat-label"> COMPANY </span>
+              </div>
+
+              <h3 id="employees-total-count">0</h3>
+
+              <p>Total Employees</p>
+
+              <small> Registered employee accounts </small>
+            </article>
+
+            <!-- Departments -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon present-icon" aria-hidden="true">▦</span>
+
+                <span class="stat-label"> ORGANIZATION </span>
+              </div>
+
+              <h3 id="departments-count">0</h3>
+
+              <p>Departments</p>
+
+              <small> Departments represented in the team </small>
+            </article>
+
+            <!-- Filtered Records -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon leave-icon" aria-hidden="true">⌕</span>
+
+                <span class="stat-label"> RESULTS </span>
+              </div>
+
+              <h3 id="filtered-employees-count">0</h3>
+
+              <p>Matching Employees</p>
+
+              <small> Records matching your filters </small>
+            </article>
+
+            <!-- Monthly Payroll -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon late-icon" aria-hidden="true">₨</span>
+
+                <span class="stat-label"> MONTHLY </span>
+              </div>
+
+              <h3 id="monthly-payroll-total">PKR 0</h3>
+
+              <p>Monthly Salary Total</p>
+
+              <small> Combined employee salaries </small>
+            </article>
+          </section>
+
+          <!-- =================================
+                     ADD / EDIT EMPLOYEE FORM
+                ================================== -->
+
+          <section
+            class="dashboard-panel employee-form-panel"
+            id="employee-form-panel"
+            aria-labelledby="employee-form-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="employee-form-heading">Add New Employee</h2>
+
+                <p id="employee-form-description">
+                  Enter employee details to create their company account.
+                </p>
+              </div>
+            </div>
+
+            <form id="employee-form">
+              <!-- Hidden ID for Edit Mode -->
+              <input type="hidden" id="employee-id" name="employeeId" />
+
+              <!-- Employee Name -->
+              <div class="form-group">
+                <label for="employee-name"> Full Name </label>
+
+                <input
+                  type="text"
+                  id="employee-name"
+                  name="name"
+                  placeholder="Enter employee's full name"
+                  autocomplete="name"
+                  maxlength="100"
+                  required
+                />
+              </div>
+
+              <!-- Email Address -->
+              <div class="form-group">
+                <label for="employee-email"> Email Address </label>
+
+                <input
+                  type="email"
+                  id="employee-email"
+                  name="email"
+                  placeholder="employee@example.com"
+                  autocomplete="email"
+                  maxlength="254"
+                  required
+                />
+              </div>
+
+              <!-- Account Password -->
+              <div class="form-group">
+                <label for="employee-password"> Account Password </label>
+
+                <input
+                  type="password"
+                  id="employee-password"
+                  name="password"
+                  placeholder="Create employee login password"
+                  autocomplete="new-password"
+                  required
+                />
+
+                <small id="password-help">
+                  Required for a new employee account. When editing, leaving
+                  this blank should keep the existing password.
+                </small>
+              </div>
+
+              <!-- Department -->
+              <div class="form-group">
+                <label for="employee-department"> Department </label>
+
+                <input
+                  type="text"
+                  id="employee-department"
+                  name="department"
+                  placeholder="e.g. IT, HR, Marketing"
+                  maxlength="80"
+                  required
+                />
+              </div>
+
+              <!-- Monthly Salary -->
+              <div class="form-group">
+                <label for="employee-salary"> Monthly Salary (PKR) </label>
+
+                <input
+                  type="number"
+                  id="employee-salary"
+                  name="salary"
+                  placeholder="e.g. 50000"
+                  min="0.01"
+                  step="0.01"
+                  required
+                />
+              </div>
+
+              <!-- Form Feedback -->
+              <p
+                id="employee-form-message"
+                role="status"
+                aria-live="polite"
+              ></p>
+
+              <!-- Submit and Cancel -->
+              <div class="employee-form-actions">
+                <button type="submit" id="employee-submit-button">
+                  Add Employee
+                </button>
+
+                <button type="button" id="cancel-edit-button" hidden>
+                  Cancel Editing
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <!-- =================================
+                     EMPLOYEE DIRECTORY
+                ================================== -->
+
+          <section
+            class="dashboard-panel employees-list-panel"
+            aria-labelledby="employee-list-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="employee-list-heading">Employee Directory</h2>
+
+                <p>Search, filter, edit and delete employee records.</p>
+              </div>
+
+              <span class="stat-label" id="employee-table-count">
+                0 employees
+              </span>
+            </div>
+
+            <!-- Search and Department Filter -->
+            <div class="employee-toolbar">
+              <div class="employee-search">
+                <label for="employee-search"> Search Employees </label>
+
+                <input
+                  type="search"
+                  id="employee-search"
+                  name="search"
+                  placeholder="Search by name or email..."
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="employee-department-filter">
+                <label for="department-filter"> Filter by Department </label>
+
+                <select id="department-filter" name="department">
+                  <option value="">All Departments</option>
+                </select>
+              </div>
+
+              <button type="button" id="clear-filters-button">
+                Clear Filters
+              </button>
+            </div>
+
+            <!-- Employee Feedback -->
+            <p id="employee-list-message" role="status" aria-live="polite"></p>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+              <table id="employees-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Employee</th>
+
+                    <th scope="col">Email Address</th>
+
+                    <th scope="col">Department</th>
+
+                    <th scope="col">Monthly Salary</th>
+
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody id="employees-table-body">
+                  <!--
+                                    Employee rows will be generated
+                                    by employees.js.
+                                -->
+
+                  <tr id="employees-empty-state">
+                    <td colspan="5" class="empty-state">
+                      No employees found. Add your first employee to get
+                      started.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Directory Footer -->
+            <div class="panel-footer">
+              <p id="employee-directory-summary">
+                Employee records will appear here after they are added.
+              </p>
+            </div>
+          </section>
+
+          <!-- =================================
+                     PAGE FOOTER
+                ================================== -->
+
+          <footer class="dashboard-footer">
+            <p>HCM Lite · Employee Management</p>
+
+            <p>Employee records are stored in this browser.</p>
+          </footer>
+        </main>
+      </div>
+    </div>
+
+    <!-- =========================================
+         JAVASCRIPT MODULES
+    ========================================== -->
+
+    <script src="../js/storage.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/employees.js" defer></script>
+  </body>
+</html>

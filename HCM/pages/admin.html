@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HCM Lite | Admin Dashboard</title>
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- Admin Dashboard CSS -->
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+
+  <body class="admin-page">
+    <div class="app-shell">
+      <!-- ======================================
+             SIDEBAR
+        ======================================= -->
+
+      <aside class="sidebar" id="admin-sidebar" aria-label="Main navigation">
+        <!-- Brand -->
+        <a href="admin.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">H</span>
+
+          <span class="brand-info">
+            <strong>HCM Lite</strong>
+            <small>Human Resources</small>
+          </span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav">
+          <p class="nav-heading">WORKSPACE</p>
+
+          <a href="admin.html" class="nav-link active" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="employees.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">♙</span>
+            <span>Employees</span>
+          </a>
+
+          <a href="leaves.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▣</span>
+            <span>Leave Requests</span>
+
+            <span class="nav-badge" id="nav-pending-leaves-count">0</span>
+          </a>
+
+          <p class="nav-heading">MANAGEMENT</p>
+
+          <a href="settings.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">⚙</span>
+            <span>Company Settings</span>
+          </a>
+
+          <a href="payslip.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            <span>Payslips</span>
+          </a>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+          <div class="sidebar-user">
+            <div class="user-avatar" aria-hidden="true">A</div>
+
+            <div class="user-info">
+              <strong id="sidebar-admin-name">Admin</strong>
+              <small>Administrator</small>
+            </div>
+          </div>
+
+          <button type="button" class="logout-button" id="logout-button">
+            <span aria-hidden="true">↪</span>
+            Log Out
+          </button>
+        </div>
+      </aside>
+
+      <!-- ======================================
+             MAIN APPLICATION AREA
+        ======================================= -->
+
+      <div class="app-main">
+        <!-- Topbar -->
+        <header class="topbar">
+          <div class="topbar-heading">
+            <p class="eyebrow">WORKSPACE / OVERVIEW</p>
+
+            <h1>Admin Dashboard</h1>
+
+            <p class="topbar-description">
+              Manage your company and monitor daily activity.
+            </p>
+          </div>
+
+          <div class="topbar-profile">
+            <div class="date-display">
+              <span aria-hidden="true">▦</span>
+
+              <time id="current-date"> Loading date... </time>
+            </div>
+
+            <div class="user-avatar topbar-avatar" aria-hidden="true">A</div>
+
+            <div class="topbar-user-info">
+              <strong id="admin-name">Admin</strong>
+              <small>Administrator</small>
+            </div>
+          </div>
+        </header>
+
+        <!-- ======================================
+                 DASHBOARD CONTENT
+            ======================================= -->
+
+        <main class="dashboard-content">
+          <!-- Welcome Section -->
+          <section class="welcome-section" aria-labelledby="welcome-heading">
+            <div>
+              <p class="eyebrow">COMPANY OVERVIEW</p>
+
+              <h2 id="welcome-heading">Welcome back, Admin!</h2>
+
+              <p id="welcome-description">
+                Here's what's happening at your company today.
+              </p>
+            </div>
+
+            <div class="workspace-status">
+              <span class="status-dot" aria-hidden="true"></span>
+
+              <span>Admin Workspace</span>
+            </div>
+          </section>
+
+          <!-- ==================================
+                     SUMMARY CARDS
+                =================================== -->
+
+          <section class="stats-grid" aria-label="Today's company statistics">
+            <!-- Total Employees -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon employees-icon" aria-hidden="true"
+                  >♙</span
+                >
+
+                <span class="stat-label"> Company </span>
+              </div>
+
+              <h3 id="total-employees-count">0</h3>
+
+              <p>Total Employees</p>
+
+              <small> Registered employee accounts </small>
+            </article>
+
+            <!-- Present Today -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon present-icon" aria-hidden="true">✓</span>
+
+                <span class="stat-label"> Today </span>
+              </div>
+
+              <h3 id="present-count">0</h3>
+
+              <p>Present Today</p>
+
+              <small> Employees who checked in </small>
+            </article>
+
+            <!-- On Leave -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon leave-icon" aria-hidden="true">▣</span>
+
+                <span class="stat-label"> Today </span>
+              </div>
+
+              <h3 id="on-leave-count">0</h3>
+
+              <p>On Leave</p>
+
+              <small> Employees with approved leave </small>
+            </article>
+
+            <!-- Late Today -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon late-icon" aria-hidden="true">◷</span>
+
+                <span class="stat-label"> Today </span>
+              </div>
+
+              <h3 id="late-count">0</h3>
+
+              <p>Late Today</p>
+
+              <small> Employees who arrived late </small>
+            </article>
+          </section>
+
+          <!-- ==================================
+                     ATTENDANCE TABLE
+                =================================== -->
+
+          <section
+            class="dashboard-panel attendance-panel"
+            aria-labelledby="attendance-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="attendance-heading">Today's Attendance</h2>
+
+                <p>Track employees' check-in and check-out records.</p>
+              </div>
+
+              <a href="#attendance-table" class="text-link"> View Records → </a>
+            </div>
+
+            <div class="table-wrapper">
+              <table id="attendance-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Employee</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Check In</th>
+                    <th scope="col">Check Out</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+
+                <tbody id="attendance-table-body">
+                  <!-- JavaScript will insert records here -->
+
+                  <tr id="attendance-empty-state">
+                    <td colspan="5" class="empty-state">
+                      No attendance records available yet.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="panel-footer">
+              <p id="attendance-summary">
+                Attendance records will appear here when employees check in.
+              </p>
+            </div>
+          </section>
+
+          <!-- ==================================
+                     LEAVE REQUESTS
+                =================================== -->
+
+          <section
+            class="dashboard-panel leave-panel"
+            aria-labelledby="leave-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="leave-heading">Pending Leave Requests</h2>
+
+                <p>Review and manage employee leave applications.</p>
+              </div>
+
+              <a href="leaves.html" class="text-link"> View All → </a>
+            </div>
+
+            <div class="table-wrapper">
+              <table id="pending-leaves-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Employee</th>
+                    <th scope="col">Leave Type</th>
+                    <th scope="col">Dates</th>
+                    <th scope="col">Days</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody id="pending-leaves-body">
+                  <!-- JavaScript will insert leave requests -->
+
+                  <tr id="leave-empty-state">
+                    <td colspan="6" class="empty-state">
+                      No pending leave requests.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- ==================================
+                     ATTENDANCE CHARTS
+                =================================== -->
+
+          <section class="charts-grid" aria-label="Attendance charts">
+            <!-- Department Chart -->
+            <article class="dashboard-panel chart-panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Attendance by Department</h2>
+
+                  <p>Compare attendance across departments.</p>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <canvas
+                  id="department-attendance-chart"
+                  role="img"
+                  aria-label="Attendance by department chart"
+                >
+                  Department attendance chart will appear here when chart
+                  functionality is implemented.
+                </canvas>
+
+                <p id="department-chart-empty" class="chart-empty-state">
+                  No department attendance data available yet.
+                </p>
+              </div>
+            </article>
+
+            <!-- Attendance Trend -->
+            <article class="dashboard-panel chart-panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Attendance Trend</h2>
+
+                  <p>View attendance patterns over time.</p>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <canvas
+                  id="attendance-trend-chart"
+                  role="img"
+                  aria-label="Attendance trend chart"
+                >
+                  Attendance trend chart will appear here when chart
+                  functionality is implemented.
+                </canvas>
+
+                <p id="attendance-trend-empty" class="chart-empty-state">
+                  Attendance history is not available yet.
+                </p>
+              </div>
+            </article>
+          </section>
+
+          <!-- ==================================
+                     SMART HELPER AND ANNOUNCEMENTS
+                =================================== -->
+
+          <section class="bottom-grid">
+            <!-- SMART HELPER -->
+            <article class="dashboard-panel helper-panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">QUICK ASSISTANCE</p>
+
+                  <h2>Smart Helper</h2>
+
+                  <p>Ask questions about your company's HR data.</p>
+                </div>
+
+                <span class="helper-icon" aria-hidden="true">✦</span>
+              </div>
+
+              <!-- Conversation Messages -->
+              <div
+                id="helper-messages"
+                class="chat-messages"
+                aria-live="polite"
+                aria-relevant="additions"
+              >
+                <div class="chat-message assistant-message">
+                  <p>
+                    Hello, Admin! Ask me about your employees, today's
+                    attendance or leave requests.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Chat Form -->
+              <form id="helper-form" class="helper-form">
+                <label for="helper-question" class="visually-hidden">
+                  Ask Smart Helper a question
+                </label>
+
+                <input
+                  type="text"
+                  id="helper-question"
+                  name="question"
+                  placeholder="e.g. How many employees do we have?"
+                  maxlength="250"
+                  autocomplete="off"
+                  required
+                />
+
+                <button type="submit" id="helper-submit">Send</button>
+              </form>
+
+              <small class="helper-note">
+                Answers will be based on saved application data.
+              </small>
+            </article>
+
+            <!-- ANNOUNCEMENTS -->
+            <article class="dashboard-panel announcement-panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">TEAM COMMUNICATION</p>
+
+                  <h2>Announcements</h2>
+
+                  <p>Share company updates with employees.</p>
+                </div>
+              </div>
+
+              <!-- Announcement Form -->
+              <form id="announcement-form" class="announcement-form">
+                <div class="form-group">
+                  <label for="announcement-title"> Announcement Title </label>
+
+                  <input
+                    type="text"
+                    id="announcement-title"
+                    name="title"
+                    placeholder="Enter announcement title"
+                    maxlength="100"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="announcement-message"> Message </label>
+
+                  <textarea
+                    id="announcement-message"
+                    name="message"
+                    rows="3"
+                    placeholder="Write your company announcement..."
+                    maxlength="1000"
+                    required
+                  ></textarea>
+                </div>
+
+                <p id="announcement-error" role="alert" aria-live="polite"></p>
+
+                <button type="submit" id="post-announcement-button">
+                  Post Announcement
+                </button>
+              </form>
+
+              <!-- Published Announcements -->
+              <div
+                class="announcements-list"
+                id="announcements-list"
+                aria-live="polite"
+              >
+                <h3>Recent Announcements</h3>
+
+                <p id="announcements-empty-state" class="empty-state">
+                  No announcements have been posted yet.
+                </p>
+              </div>
+            </article>
+          </section>
+
+          <!-- ==================================
+                     FOOTER
+                =================================== -->
+
+          <footer class="dashboard-footer">
+            <p>HCM Lite · Human Capital Management</p>
+
+            <p>Hackathon demo · Data stored in this browser</p>
+          </footer>
+        </main>
+      </div>
+    </div>
+
+    <!-- ======================================
+         JAVASCRIPT FILES
+    ======================================= -->
+
+    <script src="../js/storage.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/admin.js" defer></script>
+    <script src="../js/attendance.js" defer></script>
+    <script src="../js/leave.js" defer></script>
+    
+  </body>
+</html>

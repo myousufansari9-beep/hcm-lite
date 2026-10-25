@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Payslip | HCM Lite</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body class="app-page payslip-page">
+    <div class="app-shell">
+      <!-- =========================================
+         ADMIN SIDEBAR
+         Functionality mein sirf Admin ko show hoga
+    ========================================== -->
+
+      <aside class="sidebar payslip-sidebar" data-role-section="admin">
+        <div class="sidebar-brand">
+          <div class="brand-logo">H</div>
+
+          <div class="brand-info">
+            <h2>HCM Lite</h2>
+            <p>Human Capital Management</p>
+          </div>
+        </div>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-avatar" id="payslip-admin-avatar">A</div>
+
+          <div class="sidebar-profile-info">
+            <h3 id="payslip-admin-sidebar-name">Admin</h3>
+
+            <p>Administrator</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Admin navigation">
+          <p class="sidebar-nav-heading">MAIN MENU</p>
+
+          <a href="admin.html" class="sidebar-link">
+            <span class="nav-icon" aria-hidden="true">⌂</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="employees.html" class="sidebar-link">
+            <span class="nav-icon" aria-hidden="true">♙</span>
+            <span>Employees</span>
+          </a>
+
+          <a href="leaves.html" class="sidebar-link">
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            <span>Leave Management</span>
+          </a>
+
+          <a
+            href="payslip.html"
+            class="sidebar-link active"
+            aria-current="page"
+          >
+            <span class="nav-icon" aria-hidden="true">▣</span>
+            <span>Payslips</span>
+          </a>
+
+          <a href="settings.html" class="sidebar-link">
+            <span class="nav-icon" aria-hidden="true">⚙</span>
+            <span>Settings</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button
+            type="button"
+            class="sidebar-logout-button"
+            id="payslip-admin-logout-button"
+          >
+            <span aria-hidden="true">↪</span>
+            Logout
+          </button>
+        </div>
+      </aside>
+
+      <!-- =========================================
+         EMPLOYEE SIDEBAR
+         Functionality mein sirf Employee ko show hoga
+    ========================================== -->
+
+      <aside class="sidebar payslip-sidebar" data-role-section="employee">
+        <div class="sidebar-brand">
+          <div class="brand-logo">H</div>
+
+          <div class="brand-info">
+            <h2>HCM Lite</h2>
+            <p>Employee Portal</p>
+          </div>
+        </div>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-avatar" id="payslip-employee-avatar">E</div>
+
+          <div class="sidebar-profile-info">
+            <h3 id="payslip-employee-sidebar-name">Employee</h3>
+
+            <p id="payslip-employee-sidebar-department">Department</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Employee navigation">
+          <p class="sidebar-nav-heading">MY WORKSPACE</p>
+
+          <a href="employee.html" class="sidebar-link">
+            <span class="nav-icon" aria-hidden="true">⌂</span>
+            <span>My Dashboard</span>
+          </a>
+
+          <a
+            href="payslip.html"
+            class="sidebar-link active"
+            aria-current="page"
+          >
+            <span class="nav-icon" aria-hidden="true">▣</span>
+            <span>My Payslips</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button
+            type="button"
+            class="sidebar-logout-button"
+            id="payslip-employee-logout-button"
+          >
+            <span aria-hidden="true">↪</span>
+            Logout
+          </button>
+        </div>
+      </aside>
+
+      <!-- =========================================
+         MAIN CONTENT
+         Admin aur Employee dono ka common area
+    ========================================== -->
+
+      <main class="app-main">
+        <!-- Topbar -->
+
+        <header class="app-topbar">
+          <div class="topbar-heading">
+            <p class="page-eyebrow">PAYROLL MANAGEMENT</p>
+            <h1>Payslips</h1>
+
+            <p class="page-subtitle">
+              View monthly salary details and attendance deductions.
+            </p>
+          </div>
+
+          <div class="topbar-user">
+            <div class="topbar-date">
+              <span aria-hidden="true">◷</span>
+              <span id="payslip-current-date">Date</span>
+            </div>
+
+            <div class="topbar-user-profile">
+              <div class="topbar-avatar" id="payslip-topbar-avatar">U</div>
+
+              <div class="topbar-user-info">
+                <h3 id="payslip-topbar-name">User</h3>
+                <p id="payslip-topbar-role">Account</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Main Page Body -->
+
+        <div class="page-content">
+          <!-- =====================================
+             ADMIN PAYROLL OVERVIEW
+        ====================================== -->
+
+          <section
+            class="payslip-overview admin-payslip-overview"
+            data-role-section="admin"
+            aria-labelledby="admin-payroll-overview-title"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="admin-payroll-overview-title">Payroll Overview</h2>
+
+                <p>Monthly payroll figures for your company.</p>
+              </div>
+            </div>
+
+            <div class="stats-grid payslip-stats-grid">
+              <!-- Total Employees -->
+
+              <article class="stat-card">
+                <div class="stat-card-top">
+                  <span class="stat-card-label"> Employees </span>
+
+                  <span class="stat-card-icon" aria-hidden="true"> ♙ </span>
+                </div>
+
+                <h3 id="payslip-total-employees">0</h3>
+
+                <p class="stat-card-description">Registered employees</p>
+              </article>
+
+              <!-- Gross Payroll -->
+
+              <article class="stat-card">
+                <div class="stat-card-top">
+                  <span class="stat-card-label"> Gross Payroll </span>
+
+                  <span class="stat-card-icon" aria-hidden="true"> ₨ </span>
+                </div>
+
+                <h3 id="payslip-gross-payroll">PKR 0</h3>
+
+                <p class="stat-card-description">
+                  Salary before attendance deductions
+                </p>
+              </article>
+
+              <!-- Total Deductions -->
+
+              <article class="stat-card">
+                <div class="stat-card-top">
+                  <span class="stat-card-label"> Total Deductions </span>
+
+                  <span class="stat-card-icon" aria-hidden="true"> − </span>
+                </div>
+
+                <h3 id="payslip-total-deductions">PKR 0</h3>
+
+                <p class="stat-card-description">
+                  Absent and half-day deductions
+                </p>
+              </article>
+
+              <!-- Net Payroll -->
+
+              <article class="stat-card">
+                <div class="stat-card-top">
+                  <span class="stat-card-label"> Net Payroll </span>
+
+                  <span class="stat-card-icon" aria-hidden="true"> ✓ </span>
+                </div>
+
+                <h3 id="payslip-net-payroll">PKR 0</h3>
+
+                <p class="stat-card-description">
+                  Salary payable after deductions
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <!-- =====================================
+             EMPLOYEE SALARY OVERVIEW
+        ====================================== -->
+
+          <section
+            class="payslip-overview employee-payslip-overview"
+            data-role-section="employee"
+            aria-labelledby="employee-salary-overview-title"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="employee-salary-overview-title">My Salary Overview</h2>
+
+                <p>A quick summary of your selected month's salary.</p>
+              </div>
+            </div>
+
+            <div class="stats-grid payslip-stats-grid">
+              <!-- Monthly Salary -->
+
+              <article class="stat-card">
+                <div class="stat-card-top">
+                  <span class="stat-card-label"> Monthly Salary </span>
+
+                  <span class="stat-card-icon" aria-hidden="true"> ₨ </span>
+                </div>
+
+                <h3 id="employee-payslip-basic-salary">PKR 0</h3>
+
+                <p class="stat-card-description">
+                  Your registered monthly salary
+                </p>
+              </article>
+
+              <!-- Attendance Deduction -->
+
+              <article class="stat-card">
+                <div class="stat-card-top">
+                  <span class="stat-card-label"> Attendance Deduction </span>
+
+                  <span class="stat-card-icon" aria-hidden="true"> − </span>
+                </div>
+
+                <h3 id="employee-payslip-deduction">PKR 0</h3>
+
+                <p class="stat-card-description">
+                  Deduction for absent and half days
+                </p>
+              </article>
+
+              <!-- Net Salary -->
+
+              <article class="stat-card">
+                <div class="stat-card-top">
+                  <span class="stat-card-label"> Net Salary </span>
+
+                  <span class="stat-card-icon" aria-hidden="true"> ✓ </span>
+                </div>
+
+                <h3 id="employee-payslip-net-salary">PKR 0</h3>
+
+                <p class="stat-card-description">Your payable salary</p>
+              </article>
+            </div>
+          </section>
+
+          <!-- =====================================
+             PAYSLIP FILTERS
+             Month/year both roles can select.
+             Employee selection is Admin-only.
+        ====================================== -->
+
+          <section
+            class="panel payslip-filter-panel"
+            aria-labelledby="payslip-filter-title"
+          >
+            <div class="panel-heading">
+              <div>
+                <h2 id="payslip-filter-title">Find a Payslip</h2>
+
+                <p>Choose a month and year to view salary details.</p>
+              </div>
+            </div>
+
+            <form id="payslip-filter-form" class="payslip-filter-form">
+              <!-- Admin-only employee selector -->
+
+              <div class="form-group" data-role-section="admin">
+                <label for="payslip-employee-filter"> Select Employee </label>
+
+                <select id="payslip-employee-filter" name="employeeId" required>
+                  <option value="">Choose an employee</option>
+                </select>
+              </div>
+
+              <!-- Month selector -->
+
+              <div class="form-group">
+                <label for="payslip-month-filter"> Salary Month </label>
+
+                <select id="payslip-month-filter" name="month" required>
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+              </div>
+
+              <!-- Year selector -->
+
+              <div class="form-group">
+                <label for="payslip-year-filter"> Salary Year </label>
+
+                <input
+                  type="number"
+                  id="payslip-year-filter"
+                  name="year"
+                  min="2000"
+                  max="2100"
+                  placeholder="e.g. 2026"
+                  required
+                />
+              </div>
+
+              <!-- View button -->
+
+              <div class="payslip-filter-actions">
+                <button
+                  type="submit"
+                  class="primary-button"
+                  id="generate-payslip-button"
+                >
+                  View Payslip
+                </button>
+              </div>
+            </form>
+
+            <!-- Validation / success / error message -->
+
+            <div
+              id="payslip-message"
+              class="form-message"
+              role="status"
+              aria-live="polite"
+            ></div>
+          </section>
+
+          <!-- =====================================
+             ADMIN-ONLY PAYROLL ACTIONS
+        ====================================== -->
+
+          <section
+            class="panel admin-payroll-actions"
+            data-role-section="admin"
+            aria-labelledby="admin-payroll-actions-title"
+          >
+            <div class="panel-heading">
+              <div>
+                <h2 id="admin-payroll-actions-title">Payroll Actions</h2>
+
+                <p>Manage payroll records for the selected month.</p>
+              </div>
+            </div>
+
+            <div class="payroll-action-buttons">
+              <button
+                type="button"
+                class="secondary-button"
+                id="export-payroll-csv-button"
+              >
+                Export Payroll CSV
+              </button>
+            </div>
+
+            <p class="field-hint">
+              The export will include employee payroll figures for the selected
+              month and year.
+            </p>
+          </section>
+
+          <!-- =====================================
+             PAYSLIP PREVIEW EMPTY STATE
+        ====================================== -->
+
+          <section class="panel payslip-empty-state" id="payslip-empty-state">
+            <div class="empty-state-content">
+              <div class="empty-state-icon" aria-hidden="true">▣</div>
+
+              <h2>No Payslip Selected</h2>
+
+              <p>
+                Choose the salary month and year above, then select
+                <strong>View Payslip</strong> to display the details.
+              </p>
+            </div>
+          </section>
+
+          <!-- =====================================
+             ACTUAL PAYSLIP PREVIEW
+             Functionality will fill these fields.
+        ====================================== -->
+
+          <section
+            class="panel payslip-preview"
+            id="payslip-preview"
+            aria-labelledby="payslip-preview-title"
+            hidden
+          >
+            <!-- Payslip Header -->
+
+            <div class="payslip-document-header">
+              <div class="payslip-company-info">
+                <div class="payslip-company-logo">H</div>
+
+                <div>
+                  <h2 id="payslip-company-name">Company Name</h2>
+
+                  <p id="payslip-company-subtitle">Employee Salary Statement</p>
+                </div>
+              </div>
+
+              <div class="payslip-document-title">
+                <p class="page-eyebrow">SALARY STATEMENT</p>
+
+                <h2 id="payslip-preview-title">Monthly Payslip</h2>
+
+                <p id="payslip-period">Month, Year</p>
+
+                <span class="payslip-status" id="payslip-status">
+                  Generated
+                </span>
+              </div>
+            </div>
+
+            <!-- Employee Information -->
+
+            <div class="payslip-section">
+              <div class="payslip-section-heading">
+                <h3>Employee Information</h3>
+              </div>
+
+              <div class="payslip-employee-details">
+                <div class="detail-item">
+                  <span class="detail-label">Employee Name</span>
+
+                  <strong id="payslip-employee-name"> — </strong>
+                </div>
+
+                <div class="detail-item">
+                  <span class="detail-label">Employee ID</span>
+
+                  <strong id="payslip-employee-id"> — </strong>
+                </div>
+
+                <div class="detail-item">
+                  <span class="detail-label">Email Address</span>
+
+                  <strong id="payslip-employee-email"> — </strong>
+                </div>
+
+                <div class="detail-item">
+                  <span class="detail-label">Department</span>
+
+                  <strong id="payslip-employee-department"> — </strong>
+                </div>
+
+                <div class="detail-item">
+                  <span class="detail-label">Salary Month</span>
+
+                  <strong id="payslip-detail-month"> — </strong>
+                </div>
+
+                <div class="detail-item">
+                  <span class="detail-label">Generated On</span>
+
+                  <strong id="payslip-generated-date"> — </strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Attendance Summary -->
+
+            <div class="payslip-section">
+              <div class="payslip-section-heading">
+                <h3>Attendance Summary</h3>
+
+                <p>Attendance figures for the selected salary month.</p>
+              </div>
+
+              <div class="payslip-attendance-grid">
+                <div class="attendance-summary-item">
+                  <span>Working Days</span>
+
+                  <strong id="payslip-working-days"> 0 </strong>
+                </div>
+
+                <div class="attendance-summary-item">
+                  <span>Present Days</span>
+
+                  <strong id="payslip-present-days"> 0 </strong>
+                </div>
+
+                <div class="attendance-summary-item">
+                  <span>Late Arrivals</span>
+
+                  <strong id="payslip-late-days"> 0 </strong>
+                </div>
+
+                <div class="attendance-summary-item">
+                  <span>Half Days</span>
+
+                  <strong id="payslip-half-days"> 0 </strong>
+                </div>
+
+                <div class="attendance-summary-item">
+                  <span>Absent Days</span>
+
+                  <strong id="payslip-absent-days"> 0 </strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Salary Breakdown -->
+
+            <div class="payslip-section">
+              <div class="payslip-section-heading">
+                <h3>Salary Breakdown</h3>
+
+                <p>
+                  Salary and deductions calculated from the configured monthly
+                  salary and attendance records.
+                </p>
+              </div>
+
+              <div class="payslip-tables-grid">
+                <!-- Earnings Table -->
+
+                <div class="payslip-table-wrapper">
+                  <h4 class="payslip-table-title">Earnings</h4>
+
+                  <table class="payslip-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Description</th>
+                        <th scope="col" class="amount-column">Amount (PKR)</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>Monthly Basic Salary</td>
+
+                        <td class="amount-column" id="payslip-basic-salary">
+                          0.00
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>Daily Salary Rate</td>
+
+                        <td class="amount-column" id="payslip-daily-rate">
+                          0.00
+                        </td>
+                      </tr>
+                    </tbody>
+
+                    <tfoot>
+                      <tr>
+                        <th scope="row">Gross Salary</th>
+
+                        <th class="amount-column" id="payslip-gross-salary">
+                          0.00
+                        </th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+
+                <!-- Deductions Table -->
+
+                <div class="payslip-table-wrapper">
+                  <h4 class="payslip-table-title">Deductions</h4>
+
+                  <table class="payslip-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Description</th>
+                        <th scope="col" class="amount-column">Amount (PKR)</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>Absent-Day Deduction</td>
+
+                        <td class="amount-column" id="payslip-absent-deduction">
+                          0.00
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>Half-Day Deduction</td>
+
+                        <td
+                          class="amount-column"
+                          id="payslip-half-day-deduction"
+                        >
+                          0.00
+                        </td>
+                      </tr>
+                    </tbody>
+
+                    <tfoot>
+                      <tr>
+                        <th scope="row">Total Deductions</th>
+
+                        <th class="amount-column" id="payslip-deductions-total">
+                          0.00
+                        </th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Net Salary -->
+
+            <div class="payslip-net-payable">
+              <div>
+                <p>NET SALARY PAYABLE</p>
+
+                <span> Monthly salary after attendance deductions </span>
+              </div>
+
+              <strong id="payslip-net-salary"> PKR 0.00 </strong>
+            </div>
+
+            <!-- Calculation Note -->
+
+            <div class="payslip-calculation-note">
+              <h4>Calculation Notes</h4>
+
+              <p>
+                Daily salary is calculated by dividing the monthly salary by the
+                number of configured working days in the selected month.
+              </p>
+
+              <p>
+                Attendance deductions are based on absent days and half days
+                recorded for the selected month.
+              </p>
+            </div>
+
+            <!-- Payslip Footer -->
+
+            <footer class="payslip-document-footer">
+              <p>This payslip was generated through HCM Lite.</p>
+
+              <p>
+                <strong>Keep this statement for your records.</strong>
+              </p>
+            </footer>
+
+            <!-- Common Actions: Admin + Employee -->
+
+            <div class="payslip-preview-actions">
+              <button
+                type="button"
+                class="secondary-button"
+                id="print-payslip-button"
+              >
+                Print / Save as PDF
+              </button>
+            </div>
+          </section>
+
+          <!-- Page Footer -->
+
+          <footer class="app-page-footer">
+            <p>HCM Lite &copy; 2026. All rights reserved.</p>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <!-- Existing shared modules -->
+
+    <script src="../js/storage.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/payslip.js" defer></script>
+
+    <!-- payslip.js will be connected in the functionality step -->
+  </body>
+</html>

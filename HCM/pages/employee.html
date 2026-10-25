@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HCM Lite | Employee Dashboard</title>
+
+    <!-- Shared application stylesheet -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body class="admin-page">
+    <div class="app-shell">
+      <!-- =========================================
+             EMPLOYEE SIDEBAR
+        ========================================== -->
+
+      <aside
+        class="sidebar"
+        id="employee-sidebar"
+        aria-label="Employee navigation"
+      >
+        <!-- Brand -->
+        <a href="employee.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">H</span>
+
+          <span class="brand-info">
+            <strong>HCM Lite</strong>
+            <small>Employee Workspace</small>
+          </span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav">
+          <p class="nav-heading">MY WORKSPACE</p>
+
+          <a
+            href="#employee-dashboard"
+            class="nav-link active"
+            aria-current="page"
+          >
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="#my-attendance" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">◷</span>
+            <span>My Attendance</span>
+          </a>
+
+          <a href="#my-leaves" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▣</span>
+            <span>My Leaves</span>
+          </a>
+
+          <a href="#smart-helper" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">✦</span>
+            <span>Smart Helper</span>
+          </a>
+
+          <p class="nav-heading">MY ACCOUNT</p>
+
+          <a href="payslip.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            <span>My Payslip</span>
+          </a>
+        </nav>
+
+        <!-- Employee Profile and Logout -->
+        <div class="sidebar-footer">
+          <div class="sidebar-user">
+            <div
+              class="user-avatar"
+              id="employee-sidebar-avatar"
+              aria-hidden="true"
+            >
+              E
+            </div>
+
+            <div class="user-info">
+              <strong id="employee-sidebar-name"> Employee </strong>
+
+              <small id="employee-sidebar-department"> Department </small>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="logout-button"
+            id="employee-logout-button"
+          >
+            <span aria-hidden="true">↪</span>
+            Log Out
+          </button>
+        </div>
+      </aside>
+
+      <!-- =========================================
+             MAIN CONTENT
+        ========================================== -->
+
+      <div class="app-main">
+        <!-- Topbar -->
+        <header class="topbar">
+          <div class="topbar-heading">
+            <p class="eyebrow">MY WORKSPACE / OVERVIEW</p>
+
+            <h1>Employee Dashboard</h1>
+
+            <p class="topbar-description">
+              Manage your attendance, leave and personal records.
+            </p>
+          </div>
+
+          <div class="topbar-profile">
+            <div class="date-display">
+              <span aria-hidden="true">▦</span>
+
+              <time id="employee-current-date"> Loading date... </time>
+            </div>
+
+            <div
+              class="user-avatar topbar-avatar"
+              id="employee-topbar-avatar"
+              aria-hidden="true"
+            >
+              E
+            </div>
+
+            <div class="topbar-user-info">
+              <strong id="employee-display-name"> Employee </strong>
+
+              <small id="employee-display-department"> Department </small>
+            </div>
+          </div>
+        </header>
+
+        <!-- =====================================
+                 DASHBOARD CONTENT
+            ====================================== -->
+
+        <main class="dashboard-content" id="employee-dashboard">
+          <!-- Welcome Section -->
+          <section
+            class="welcome-section"
+            aria-labelledby="employee-welcome-heading"
+          >
+            <div>
+              <p class="eyebrow">PERSONAL OVERVIEW</p>
+
+              <h2 id="employee-welcome-heading">
+                Welcome back, <span id="employee-welcome-name">Employee</span>!
+              </h2>
+
+              <p>
+                Here's your daily attendance, leave balance and work summary.
+              </p>
+            </div>
+
+            <div class="workspace-status">
+              <span class="status-dot" aria-hidden="true"></span>
+
+              <span>Employee Workspace</span>
+            </div>
+          </section>
+
+          <!-- =================================
+                     PERSONAL STATISTICS
+                ================================== -->
+
+          <section class="stats-grid" aria-label="My statistics">
+            <!-- Present Days -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon present-icon" aria-hidden="true">✓</span>
+
+                <span class="stat-label">THIS MONTH</span>
+              </div>
+
+              <h3 id="employee-present-days">0</h3>
+
+              <p>Present Days</p>
+
+              <small> Days with attendance recorded </small>
+            </article>
+
+            <!-- Late Days -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon late-icon" aria-hidden="true">◷</span>
+
+                <span class="stat-label">THIS MONTH</span>
+              </div>
+
+              <h3 id="employee-late-days">0</h3>
+
+              <p>Late Days</p>
+
+              <small> Late arrival records </small>
+            </article>
+
+            <!-- Remaining Leave -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon leave-icon" aria-hidden="true">▣</span>
+
+                <span class="stat-label">LEAVE BALANCE</span>
+              </div>
+
+              <h3 id="employee-leave-remaining">0</h3>
+
+              <p>Leaves Remaining</p>
+
+              <small> Approved leave days deducted </small>
+            </article>
+
+            <!-- Weekly Hours -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon employees-icon" aria-hidden="true"
+                  >◴</span
+                >
+
+                <span class="stat-label">THIS WEEK</span>
+              </div>
+
+              <h3 id="employee-weekly-hours">0h</h3>
+
+              <p>Hours Worked</p>
+
+              <small> Based on recorded check-in/out times </small>
+            </article>
+          </section>
+
+          <!-- =================================
+                     TODAY'S ATTENDANCE
+                ================================== -->
+
+          <section
+            class="dashboard-panel employee-attendance-panel"
+            id="my-attendance"
+            aria-labelledby="today-attendance-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="today-attendance-heading">Today's Attendance</h2>
+
+                <p>
+                  Record your arrival and departure for today's working hours.
+                </p>
+              </div>
+
+              <span
+                class="status-badge status-pending"
+                id="employee-today-status"
+              >
+                Not Checked In
+              </span>
+            </div>
+
+            <!-- Attendance Time Cards -->
+            <div class="employee-attendance-summary">
+              <div class="attendance-time-card">
+                <span class="attendance-time-icon" aria-hidden="true">↘</span>
+
+                <div>
+                  <p>Check-in Time</p>
+
+                  <h3 id="employee-check-in-time">—</h3>
+
+                  <small> Your recorded arrival </small>
+                </div>
+              </div>
+
+              <div class="attendance-time-card">
+                <span class="attendance-time-icon" aria-hidden="true">↗</span>
+
+                <div>
+                  <p>Check-out Time</p>
+
+                  <h3 id="employee-check-out-time">—</h3>
+
+                  <small> Your recorded departure </small>
+                </div>
+              </div>
+
+              <div class="attendance-time-card">
+                <span class="attendance-time-icon" aria-hidden="true">◷</span>
+
+                <div>
+                  <p>Hours Worked</p>
+
+                  <h3 id="employee-today-hours">0h 0m</h3>
+
+                  <small> Today's recorded duration </small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Check-in / Check-out Controls -->
+            <div class="attendance-actions">
+              <div class="attendance-action-description">
+                <strong>Attendance Actions</strong>
+
+                <p
+                  id="employee-attendance-message"
+                  role="status"
+                  aria-live="polite"
+                >
+                  Check in when you arrive at work.
+                </p>
+              </div>
+
+              <div class="attendance-buttons">
+                <button type="button" id="employee-check-in-button">
+                  Check In
+                </button>
+
+                <button type="button" id="employee-check-out-button" disabled>
+                  Check Out
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- =================================
+                     ATTENDANCE HISTORY
+                ================================== -->
+
+          <section
+            class="dashboard-panel employee-history-panel"
+            aria-labelledby="employee-attendance-history-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="employee-attendance-history-heading">
+                  My Attendance History
+                </h2>
+
+                <p>Review your personal attendance records.</p>
+              </div>
+
+              <span class="stat-label" id="employee-attendance-record-count">
+                0 Records
+              </span>
+            </div>
+
+            <div class="table-wrapper">
+              <table id="employee-attendance-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+
+                    <th scope="col">Check In</th>
+
+                    <th scope="col">Check Out</th>
+
+                    <th scope="col">Hours Worked</th>
+
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+
+                <tbody id="employee-attendance-body">
+                  <!-- JavaScript will add attendance rows -->
+
+                  <tr id="employee-attendance-empty">
+                    <td colspan="5" class="empty-state">
+                      No attendance records available yet.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- =================================
+                     LEAVE BALANCE
+                ================================== -->
+
+          <section
+            class="dashboard-panel employee-leave-balance-panel"
+            aria-labelledby="employee-leave-balance-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="employee-leave-balance-heading">My Leave Balance</h2>
+
+                <p>Keep track of your annual leave allowance.</p>
+              </div>
+            </div>
+
+            <div class="employee-leave-balance-grid">
+              <article class="leave-balance-card">
+                <span>Annual Allowance</span>
+
+                <h3 id="employee-leave-quota">0 Days</h3>
+
+                <small> Yearly quota set by your company </small>
+              </article>
+
+              <article class="leave-balance-card">
+                <span>Approved Leave Used</span>
+
+                <h3 id="employee-leave-used">0 Days</h3>
+
+                <small> Approved working days </small>
+              </article>
+
+              <article class="leave-balance-card">
+                <span>Remaining Balance</span>
+
+                <h3 id="employee-leave-balance">0 Days</h3>
+
+                <small> Available leave allowance </small>
+              </article>
+            </div>
+
+            <p class="employee-leave-balance-note">
+              Pending requests are not counted as approved leave.
+            </p>
+          </section>
+
+          <!-- =================================
+                     APPLY FOR LEAVE
+                ================================== -->
+
+          <section
+            class="dashboard-panel employee-leave-form-panel"
+            id="my-leaves"
+            aria-labelledby="employee-leave-form-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="employee-leave-form-heading">Apply for Leave</h2>
+
+                <p>Submit a leave request for Admin review.</p>
+              </div>
+            </div>
+
+            <form id="employee-leave-form">
+              <!-- Leave Type -->
+              <div class="form-group">
+                <label for="employee-leave-type"> Leave Type </label>
+
+                <select id="employee-leave-type" name="type" required>
+                  <option value="">Select leave type</option>
+
+                  <option value="casual">Casual Leave</option>
+
+                  <option value="sick">Sick Leave</option>
+
+                  <option value="annual">Annual Leave</option>
+                </select>
+              </div>
+
+              <!-- From Date -->
+              <div class="form-group">
+                <label for="employee-leave-from"> From Date </label>
+
+                <input
+                  type="date"
+                  id="employee-leave-from"
+                  name="from"
+                  required
+                />
+              </div>
+
+              <!-- To Date -->
+              <div class="form-group">
+                <label for="employee-leave-to"> To Date </label>
+
+                <input type="date" id="employee-leave-to" name="to" required />
+              </div>
+
+              <!-- Reason -->
+              <div class="form-group">
+                <label for="employee-leave-reason"> Reason for Leave </label>
+
+                <textarea
+                  id="employee-leave-reason"
+                  name="reason"
+                  rows="4"
+                  maxlength="500"
+                  placeholder="Explain your leave request..."
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Leave Form Feedback -->
+              <p
+                id="employee-leave-message"
+                role="status"
+                aria-live="polite"
+              ></p>
+
+              <!-- Submit -->
+              <div class="employee-leave-form-actions">
+                <button type="submit" id="employee-submit-leave-button">
+                  Submit Leave Request
+                </button>
+
+                <button type="reset" id="employee-reset-leave-button">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <!-- =================================
+                     MY LEAVE HISTORY
+                ================================== -->
+
+          <section
+            class="dashboard-panel employee-leave-history-panel"
+            aria-labelledby="employee-leave-history-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="employee-leave-history-heading">My Leave History</h2>
+
+                <p>Track your previous and pending applications.</p>
+              </div>
+
+              <span class="stat-label" id="employee-leave-record-count">
+                0 Requests
+              </span>
+            </div>
+
+            <div class="table-wrapper">
+              <table id="employee-leave-history-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Leave Type</th>
+
+                    <th scope="col">From</th>
+
+                    <th scope="col">To</th>
+
+                    <th scope="col">Working Days</th>
+
+                    <th scope="col">Status</th>
+
+                    <th scope="col">Admin Comment</th>
+                  </tr>
+                </thead>
+
+                <tbody id="employee-leave-history-body">
+                  <!-- JavaScript will add leave records -->
+
+                  <tr id="employee-leave-history-empty">
+                    <td colspan="6" class="empty-state">
+                      You have not submitted any leave requests yet.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- =================================
+                     SMART HELPER
+                ================================== -->
+
+          <section
+            class="dashboard-panel employee-helper-panel"
+            id="smart-helper"
+            aria-labelledby="employee-helper-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">PERSONAL ASSISTANCE</p>
+
+                <h2 id="employee-helper-heading">Smart Helper</h2>
+
+                <p>
+                  Ask questions about your own attendance and leave records.
+                </p>
+              </div>
+
+              <span class="helper-icon" aria-hidden="true">✦</span>
+            </div>
+
+            <!-- Chat Messages -->
+            <div
+              id="employee-helper-messages"
+              class="chat-messages"
+              aria-live="polite"
+              aria-relevant="additions"
+            >
+              <div class="chat-message assistant-message">
+                <p>
+                  Hello! You can ask about your leave balance, today's
+                  attendance or the hours you worked this week.
+                </p>
+              </div>
+            </div>
+
+            <!-- Chat Form -->
+            <form id="employee-helper-form" class="helper-form">
+              <label for="employee-helper-question" class="visually-hidden">
+                Ask Smart Helper a question
+              </label>
+
+              <input
+                type="text"
+                id="employee-helper-question"
+                name="question"
+                placeholder="e.g. How many leaves do I have left?"
+                maxlength="250"
+                autocomplete="off"
+                required
+              />
+
+              <button type="submit" id="employee-helper-submit-button">
+                Send
+              </button>
+            </form>
+
+            <small class="helper-note">
+              Responses will be based on your own saved records.
+            </small>
+          </section>
+
+          <!-- =================================
+                     COMPANY ANNOUNCEMENTS
+                ================================== -->
+
+          <section
+            class="dashboard-panel employee-announcements-panel"
+            aria-labelledby="employee-announcements-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">COMPANY UPDATES</p>
+
+                <h2 id="employee-announcements-heading">Announcements</h2>
+
+                <p>Stay informed about company news and updates.</p>
+              </div>
+            </div>
+
+            <div id="employee-announcements-list" aria-live="polite">
+              <!-- JavaScript will populate announcements -->
+
+              <p id="employee-announcements-empty" class="empty-state">
+                No company announcements available yet.
+              </p>
+            </div>
+          </section>
+
+          <!-- =================================
+                     MY PAYSLIP
+                ================================== -->
+
+          <section
+            class="dashboard-panel employee-payslip-panel"
+            aria-labelledby="employee-payslip-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="employee-payslip-heading">My Monthly Payslip</h2>
+
+                <p>
+                  View your monthly salary breakdown and attendance-based
+                  deductions.
+                </p>
+              </div>
+
+              <a href="payslip.html" class="text-link"> View Payslip → </a>
+            </div>
+
+            <p class="employee-payslip-note">
+              Your payslip will be available when salary calculations and the
+              payslip module are implemented.
+            </p>
+          </section>
+
+          <!-- =================================
+                     FOOTER
+                ================================== -->
+
+          <footer class="dashboard-footer">
+            <p>HCM Lite · Employee Workspace</p>
+
+            <p>Personal records stored in this browser</p>
+          </footer>
+        </main>
+      </div>
+    </div>
+
+    <!-- =========================================
+         JAVASCRIPT MODULES
+         Additional modules will be connected
+         as their implementations are completed.
+    ========================================== -->
+
+    <script src="../js/storage.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/attendance.js" defer></script>
+    <script src="../js/leave.js" defer></script>
+  </body>
+</html>

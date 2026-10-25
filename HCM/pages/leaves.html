@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HCM Lite | Leave Management</title>
+
+    <!-- Shared stylesheet for the entire application -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body class="admin-page">
+    <div class="app-shell">
+      <!-- =========================================
+             SIDEBAR
+        ========================================== -->
+
+      <aside class="sidebar" id="admin-sidebar" aria-label="Main navigation">
+        <!-- Brand -->
+        <a href="admin.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">H</span>
+
+          <span class="brand-info">
+            <strong>HCM Lite</strong>
+            <small>Human Resources</small>
+          </span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav">
+          <p class="nav-heading">WORKSPACE</p>
+
+          <a href="admin.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="employees.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">♙</span>
+            <span>Employees</span>
+          </a>
+
+          <a href="leaves.html" class="nav-link active" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">▣</span>
+            <span>Leave Requests</span>
+
+            <span class="nav-badge" id="leaves-pending-sidebar-count">0</span>
+          </a>
+
+          <p class="nav-heading">MANAGEMENT</p>
+
+          <a href="settings.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">⚙</span>
+            <span>Company Settings</span>
+          </a>
+
+          <a href="payslip.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            <span>Payslips</span>
+          </a>
+        </nav>
+
+        <!-- Sidebar Profile -->
+        <div class="sidebar-footer">
+          <div class="sidebar-user">
+            <div
+              class="user-avatar"
+              id="sidebar-admin-avatar"
+              aria-hidden="true"
+            >
+              A
+            </div>
+
+            <div class="user-info">
+              <strong id="sidebar-admin-name">Admin</strong>
+              <small>Administrator</small>
+            </div>
+          </div>
+
+          <button type="button" class="logout-button" id="logout-button">
+            <span aria-hidden="true">↪</span>
+            Log Out
+          </button>
+        </div>
+      </aside>
+
+      <!-- =========================================
+             MAIN CONTENT
+        ========================================== -->
+
+      <div class="app-main">
+        <!-- Topbar -->
+        <header class="topbar">
+          <div class="topbar-heading">
+            <p class="eyebrow">WORKSPACE / LEAVE MANAGEMENT</p>
+
+            <h1>Leave Requests</h1>
+
+            <p class="topbar-description">
+              Review employee leave applications and manage approvals.
+            </p>
+          </div>
+
+          <div class="topbar-profile">
+            <div class="date-display">
+              <span aria-hidden="true">▦</span>
+
+              <time id="current-date"> Loading date... </time>
+            </div>
+
+            <div
+              class="user-avatar topbar-avatar"
+              id="admin-avatar"
+              aria-hidden="true"
+            >
+              A
+            </div>
+
+            <div class="topbar-user-info">
+              <strong id="admin-name">Admin</strong>
+              <small>Administrator</small>
+            </div>
+          </div>
+        </header>
+
+        <!-- =====================================
+                 LEAVE MANAGEMENT CONTENT
+            ====================================== -->
+
+        <main class="dashboard-content" id="leave-management-page">
+          <!-- Page Introduction -->
+          <section class="welcome-section" aria-labelledby="leave-page-heading">
+            <div>
+              <p class="eyebrow">PEOPLE & ORGANIZATION</p>
+
+              <h2 id="leave-page-heading">Manage Leave Applications</h2>
+
+              <p>
+                Review requests, check leave dates and record your approval
+                decisions.
+              </p>
+            </div>
+
+            <div class="workspace-status">
+              <span class="status-dot" aria-hidden="true"></span>
+
+              <span>Admin Workspace</span>
+            </div>
+          </section>
+
+          <!-- =================================
+                     LEAVE SUMMARY CARDS
+                ================================== -->
+
+          <section class="stats-grid" aria-label="Leave request statistics">
+            <!-- Total Requests -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon employees-icon" aria-hidden="true"
+                  >▤</span
+                >
+
+                <span class="stat-label"> ALL REQUESTS </span>
+              </div>
+
+              <h3 id="leaves-total-count">0</h3>
+
+              <p>Total Requests</p>
+
+              <small> All employee leave applications </small>
+            </article>
+
+            <!-- Pending Requests -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon leave-icon" aria-hidden="true">◷</span>
+
+                <span class="stat-label"> NEEDS REVIEW </span>
+              </div>
+
+              <h3 id="leaves-pending-count">0</h3>
+
+              <p>Pending Requests</p>
+
+              <small> Awaiting an Admin decision </small>
+            </article>
+
+            <!-- Approved Requests -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon present-icon" aria-hidden="true">✓</span>
+
+                <span class="stat-label"> APPROVED </span>
+              </div>
+
+              <h3 id="leaves-approved-count">0</h3>
+
+              <p>Approved Requests</p>
+
+              <small> Applications approved by Admin </small>
+            </article>
+
+            <!-- Rejected Requests -->
+            <article class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon late-icon" aria-hidden="true">×</span>
+
+                <span class="stat-label"> REJECTED </span>
+              </div>
+
+              <h3 id="leaves-rejected-count">0</h3>
+
+              <p>Rejected Requests</p>
+
+              <small> Applications not approved </small>
+            </article>
+          </section>
+
+          <!-- =================================
+                     SEARCH AND FILTER TOOLBAR
+                ================================== -->
+
+          <section
+            class="dashboard-panel leave-filters-panel"
+            aria-labelledby="leave-filters-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="leave-filters-heading">Find Leave Requests</h2>
+
+                <p>
+                  Search applications and filter them by status or leave type.
+                </p>
+              </div>
+            </div>
+
+            <div class="leave-filters-toolbar">
+              <!-- Search -->
+              <div class="form-group">
+                <label for="leave-search"> Search </label>
+
+                <input
+                  type="search"
+                  id="leave-search"
+                  name="search"
+                  placeholder="Search employee name or email..."
+                  autocomplete="off"
+                />
+              </div>
+
+              <!-- Status Filter -->
+              <div class="form-group">
+                <label for="leave-status-filter"> Request Status </label>
+
+                <select id="leave-status-filter" name="status">
+                  <option value="all">All Statuses</option>
+
+                  <option value="pending">Pending</option>
+
+                  <option value="approved">Approved</option>
+
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+
+              <!-- Leave Type Filter -->
+              <div class="form-group">
+                <label for="leave-type-filter"> Leave Type </label>
+
+                <select id="leave-type-filter" name="type">
+                  <option value="all">All Leave Types</option>
+
+                  <option value="casual">Casual Leave</option>
+
+                  <option value="sick">Sick Leave</option>
+
+                  <option value="annual">Annual Leave</option>
+                </select>
+              </div>
+
+              <!-- Clear Filters -->
+              <button type="button" id="clear-leave-filters">
+                Clear Filters
+              </button>
+            </div>
+          </section>
+
+          <!-- =================================
+                     LEAVE REQUESTS TABLE
+                ================================== -->
+
+          <section
+            class="dashboard-panel leave-requests-panel"
+            aria-labelledby="leave-requests-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="leave-requests-heading">Employee Leave Applications</h2>
+
+                <p>
+                  Review the request details and take action on pending
+                  applications.
+                </p>
+              </div>
+
+              <span class="stat-label" id="leave-requests-count">
+                0 Requests
+              </span>
+            </div>
+
+            <!-- Feedback Messages -->
+            <p id="leave-list-message" role="status" aria-live="polite"></p>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+              <table id="leave-requests-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Employee</th>
+
+                    <th scope="col">Leave Type</th>
+
+                    <th scope="col">Date Range</th>
+
+                    <th scope="col">Working Days</th>
+
+                    <th scope="col">Reason</th>
+
+                    <th scope="col">Status</th>
+
+                    <th scope="col">Admin Comment</th>
+
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody id="leave-requests-body">
+                  <!--
+                                    JavaScript will generate leave request
+                                    rows from hcm_leaves and hcm_users.
+                                -->
+
+                  <tr id="leave-requests-empty-state">
+                    <td colspan="8" class="empty-state">
+                      No leave requests available yet. Employee applications
+                      will appear here.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Table Footer -->
+            <div class="panel-footer">
+              <p id="leave-requests-summary">
+                Leave request records will appear here when employees submit
+                applications.
+              </p>
+            </div>
+          </section>
+
+          <!-- =================================
+                     LEAVE REVIEW DIALOG
+                ================================== -->
+
+          <dialog
+            id="leave-review-dialog"
+            class="leave-review-dialog"
+            aria-labelledby="leave-review-heading"
+          >
+            <div class="leave-review-dialog-content">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">REQUEST REVIEW</p>
+
+                  <h2 id="leave-review-heading">Review Leave Request</h2>
+
+                  <p>
+                    Confirm your decision and provide a comment for the
+                    employee.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  id="cancel-leave-review-button"
+                  aria-label="Close review dialog"
+                >
+                  ×
+                </button>
+              </div>
+
+              <!-- Selected Request Information -->
+              <div class="leave-review-summary">
+                <p>
+                  <span>Employee</span>
+
+                  <strong id="review-employee-name"> — </strong>
+                </p>
+
+                <p>
+                  <span>Leave Period</span>
+
+                  <strong id="review-leave-period"> — </strong>
+                </p>
+
+                <p>
+                  <span>Working Days</span>
+
+                  <strong id="review-leave-days"> — </strong>
+                </p>
+              </div>
+
+              <!-- Decision Form -->
+              <form id="leave-review-form">
+                <!-- Used internally by leave.js -->
+                <input type="hidden" id="review-leave-id" name="leaveId" />
+
+                <input
+                  type="hidden"
+                  id="review-leave-decision"
+                  name="decision"
+                />
+
+                <div class="form-group">
+                  <label for="leave-review-comment"> Admin Comment </label>
+
+                  <textarea
+                    id="leave-review-comment"
+                    name="comment"
+                    rows="4"
+                    maxlength="500"
+                    placeholder="Add a comment explaining your decision..."
+                    required
+                  ></textarea>
+
+                  <small>
+                    A comment is required before confirming the decision.
+                  </small>
+                </div>
+
+                <p
+                  id="leave-review-message"
+                  role="alert"
+                  aria-live="polite"
+                ></p>
+
+                <div class="leave-review-actions">
+                  <button
+                    type="button"
+                    id="approve-leave-button"
+                    data-decision="approved"
+                  >
+                    Approve Request
+                  </button>
+
+                  <button
+                    type="button"
+                    id="reject-leave-button"
+                    data-decision="rejected"
+                  >
+                    Reject Request
+                  </button>
+                </div>
+              </form>
+            </div>
+          </dialog>
+
+          <!-- =================================
+                     PAGE FOOTER
+                ================================== -->
+
+          <footer class="dashboard-footer">
+            <p>HCM Lite · Leave Management</p>
+
+            <p>Leave requests are stored in this browser.</p>
+          </footer>
+        </main>
+      </div>
+    </div>
+
+    <!-- =========================================
+         JAVASCRIPT MODULES
+    ========================================== -->
+
+    <script src="../js/storage.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/leave.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HCM Lite | Company Settings</title>
+
+    <!-- Shared stylesheet -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body class="admin-page">
+    <div class="app-shell">
+      <!-- =========================================
+             SIDEBAR
+        ========================================== -->
+
+      <aside class="sidebar" id="admin-sidebar" aria-label="Main navigation">
+        <a href="admin.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">H</span>
+
+          <span class="brand-info">
+            <strong>HCM Lite</strong>
+            <small>Human Resources</small>
+          </span>
+        </a>
+
+        <nav class="sidebar-nav">
+          <p class="nav-heading">WORKSPACE</p>
+
+          <a href="admin.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="employees.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">♙</span>
+            <span>Employees</span>
+          </a>
+
+          <a href="leaves.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▣</span>
+            <span>Leave Requests</span>
+          </a>
+
+          <p class="nav-heading">MANAGEMENT</p>
+
+          <a href="settings.html" class="nav-link active" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">⚙</span>
+            <span>Company Settings</span>
+          </a>
+
+          <a href="payslip.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            <span>Payslips</span>
+          </a>
+        </nav>
+
+        <!-- Sidebar Profile -->
+        <div class="sidebar-footer">
+          <div class="sidebar-user">
+            <div
+              class="user-avatar"
+              id="sidebar-admin-avatar"
+              aria-hidden="true"
+            >
+              A
+            </div>
+
+            <div class="user-info">
+              <strong id="sidebar-admin-name">Admin</strong>
+              <small>Administrator</small>
+            </div>
+          </div>
+
+          <button type="button" class="logout-button" id="logout-button">
+            <span aria-hidden="true">↪</span>
+            Log Out
+          </button>
+        </div>
+      </aside>
+
+      <!-- =========================================
+             MAIN CONTENT
+        ========================================== -->
+
+      <div class="app-main">
+        <!-- Topbar -->
+        <header class="topbar">
+          <div class="topbar-heading">
+            <p class="eyebrow">MANAGEMENT / SETTINGS</p>
+
+            <h1>Company Settings</h1>
+
+            <p class="topbar-description">
+              Configure office timings and company policies.
+            </p>
+          </div>
+
+          <div class="topbar-profile">
+            <div class="date-display">
+              <span aria-hidden="true">▦</span>
+
+              <time id="current-date"> Loading date... </time>
+            </div>
+
+            <div
+              class="user-avatar topbar-avatar"
+              id="admin-avatar"
+              aria-hidden="true"
+            >
+              A
+            </div>
+
+            <div class="topbar-user-info">
+              <strong id="admin-name">Admin</strong>
+              <small>Administrator</small>
+            </div>
+          </div>
+        </header>
+
+        <!-- =====================================
+                 SETTINGS PAGE CONTENT
+            ====================================== -->
+
+        <main class="dashboard-content">
+          <!-- Page Introduction -->
+          <section class="welcome-section" aria-labelledby="settings-heading">
+            <div>
+              <p class="eyebrow">COMPANY CONFIGURATION</p>
+
+              <h2 id="settings-heading">Configure Your Workplace</h2>
+
+              <p>
+                Manage attendance rules, working days and yearly leave
+                allowances.
+              </p>
+            </div>
+
+            <div class="workspace-status">
+              <span class="status-dot" aria-hidden="true"></span>
+
+              <span>Admin Workspace</span>
+            </div>
+          </section>
+
+          <!-- =================================
+                     COMPANY INFORMATION
+                ================================== -->
+
+          <section
+            class="dashboard-panel settings-company-panel"
+            aria-labelledby="company-information-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="company-information-heading">Company Information</h2>
+
+                <p>Your company profile for the current HCM Lite workspace.</p>
+              </div>
+            </div>
+
+            <div class="settings-company-information">
+              <div class="settings-information-icon" aria-hidden="true">H</div>
+
+              <div class="settings-information-content">
+                <span class="settings-field-label"> Company Name </span>
+
+                <strong id="settings-company-name"> Loading company... </strong>
+
+                <small>
+                  Company name is created during first-time setup.
+                </small>
+              </div>
+            </div>
+          </section>
+
+          <!-- =================================
+                     SETTINGS FORM
+                ================================== -->
+
+          <section
+            class="dashboard-panel settings-form-panel"
+            aria-labelledby="settings-form-heading"
+          >
+            <div class="panel-header">
+              <div>
+                <h2 id="settings-form-heading">Workplace Policies</h2>
+
+                <p>
+                  Set the rules that will be used by attendance and leave
+                  management.
+                </p>
+              </div>
+            </div>
+
+            <form id="settings-form" novalidate>
+              <!-- ---------------------------------
+                             SECTION 1: OFFICE TIMING
+                        ---------------------------------- -->
+
+              <fieldset class="settings-fieldset">
+                <legend class="settings-section-heading">
+                  <span class="settings-section-icon" aria-hidden="true"
+                    >◷</span
+                  >
+
+                  Office Timing
+                </legend>
+
+                <p class="settings-section-description">
+                  Define your company's official daily starting time and
+                  late-arrival grace period.
+                </p>
+
+                <div class="settings-fields-grid">
+                  <!-- Office Start Time -->
+                  <div class="form-group">
+                    <label for="office-start-time"> Office Start Time </label>
+
+                    <input
+                      type="time"
+                      id="office-start-time"
+                      name="officeStartTime"
+                      value="09:00"
+                      required
+                    />
+
+                    <small class="settings-field-help">
+                      The official time employees are expected to start work.
+                    </small>
+                  </div>
+
+                  <!-- Grace Period -->
+                  <div class="form-group">
+                    <label for="grace-minutes"> Grace Period (Minutes) </label>
+
+                    <input
+                      type="number"
+                      id="grace-minutes"
+                      name="graceMinutes"
+                      value="15"
+                      min="0"
+                      max="1440"
+                      step="1"
+                      required
+                    />
+
+                    <small class="settings-field-help">
+                      Extra minutes allowed after the official starting time.
+                    </small>
+                  </div>
+                </div>
+
+                <!-- Attendance Rule Information -->
+                <div class="settings-info-note">
+                  <span aria-hidden="true">ⓘ</span>
+
+                  <p>
+                    <strong>Attendance rule:</strong>
+                    An employee is marked late only when their check-in time is
+                    after the office start time plus the grace period.
+                  </p>
+                </div>
+              </fieldset>
+
+              <!-- ---------------------------------
+                             SECTION 2: LEAVE POLICY
+                        ---------------------------------- -->
+
+              <fieldset class="settings-fieldset">
+                <legend class="settings-section-heading">
+                  <span class="settings-section-icon" aria-hidden="true"
+                    >▣</span
+                  >
+
+                  Annual Leave Policy
+                </legend>
+
+                <p class="settings-section-description">
+                  Set the yearly leave allowance available to each employee.
+                </p>
+
+                <div class="settings-fields-grid">
+                  <div class="form-group">
+                    <label for="yearly-leave-quota">
+                      Yearly Leave Quota (Days)
+                    </label>
+
+                    <input
+                      type="number"
+                      id="yearly-leave-quota"
+                      name="yearlyLeaveQuota"
+                      value="20"
+                      min="0"
+                      max="366"
+                      step="1"
+                      required
+                    />
+
+                    <small class="settings-field-help">
+                      Maximum number of leave working days allowed per employee
+                      annually.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="settings-info-note">
+                  <span aria-hidden="true">ⓘ</span>
+
+                  <p>
+                    <strong>Leave rule:</strong>
+                    Leave calculations will count configured working days only,
+                    excluding non-working days. Overlapping requests and quota
+                    limits will be checked separately.
+                  </p>
+                </div>
+              </fieldset>
+
+              <!-- ---------------------------------
+                             SECTION 3: WORKING DAYS
+                        ---------------------------------- -->
+
+              <fieldset class="settings-fieldset" id="working-days-fieldset">
+                <legend class="settings-section-heading">
+                  <span class="settings-section-icon" aria-hidden="true"
+                    >▦</span
+                  >
+
+                  Working Days
+                </legend>
+
+                <p class="settings-section-description">
+                  Select the days on which your company normally operates.
+                </p>
+
+                <div class="working-days-grid">
+                  <!-- Monday -->
+                  <label class="working-day-option">
+                    <input
+                      type="checkbox"
+                      name="workingDays"
+                      value="Monday"
+                      checked
+                    />
+
+                    <span class="working-day-content">
+                      <strong>Mon</strong>
+                      <small>Monday</small>
+                    </span>
+                  </label>
+
+                  <!-- Tuesday -->
+                  <label class="working-day-option">
+                    <input
+                      type="checkbox"
+                      name="workingDays"
+                      value="Tuesday"
+                      checked
+                    />
+
+                    <span class="working-day-content">
+                      <strong>Tue</strong>
+                      <small>Tuesday</small>
+                    </span>
+                  </label>
+
+                  <!-- Wednesday -->
+                  <label class="working-day-option">
+                    <input
+                      type="checkbox"
+                      name="workingDays"
+                      value="Wednesday"
+                      checked
+                    />
+
+                    <span class="working-day-content">
+                      <strong>Wed</strong>
+                      <small>Wednesday</small>
+                    </span>
+                  </label>
+
+                  <!-- Thursday -->
+                  <label class="working-day-option">
+                    <input
+                      type="checkbox"
+                      name="workingDays"
+                      value="Thursday"
+                      checked
+                    />
+
+                    <span class="working-day-content">
+                      <strong>Thu</strong>
+                      <small>Thursday</small>
+                    </span>
+                  </label>
+
+                  <!-- Friday -->
+                  <label class="working-day-option">
+                    <input
+                      type="checkbox"
+                      name="workingDays"
+                      value="Friday"
+                      checked
+                    />
+
+                    <span class="working-day-content">
+                      <strong>Fri</strong>
+                      <small>Friday</small>
+                    </span>
+                  </label>
+
+                  <!-- Saturday -->
+                  <label class="working-day-option">
+                    <input
+                      type="checkbox"
+                      name="workingDays"
+                      value="Saturday"
+                    />
+
+                    <span class="working-day-content">
+                      <strong>Sat</strong>
+                      <small>Saturday</small>
+                    </span>
+                  </label>
+
+                  <!-- Sunday -->
+                  <label class="working-day-option">
+                    <input type="checkbox" name="workingDays" value="Sunday" />
+
+                    <span class="working-day-content">
+                      <strong>Sun</strong>
+                      <small>Sunday</small>
+                    </span>
+                  </label>
+                </div>
+
+                <p
+                  id="working-days-error"
+                  class="settings-error-message"
+                  role="alert"
+                  aria-live="polite"
+                ></p>
+
+                <div class="settings-info-note">
+                  <span aria-hidden="true">ⓘ</span>
+
+                  <p>
+                    Select at least one working day. The selected schedule will
+                    be used by future attendance and leave calculations.
+                  </p>
+                </div>
+              </fieldset>
+
+              <!-- ---------------------------------
+                             FORM FEEDBACK
+                        ---------------------------------- -->
+
+              <div class="settings-form-feedback" aria-live="polite">
+                <p id="settings-message" role="status"></p>
+              </div>
+
+              <!-- ---------------------------------
+                             FORM ACTIONS
+                        ---------------------------------- -->
+
+              <div class="settings-form-actions">
+                <button type="submit" id="save-settings-button">
+                  Save Settings
+                </button>
+
+                <button type="button" id="reload-settings-button">
+                  Reload Saved Settings
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <!-- =================================
+                     SETTINGS FOOTER
+                ================================== -->
+
+          <footer class="dashboard-footer">
+            <p>HCM Lite · Company Settings</p>
+
+            <p>Settings are stored in this browser.</p>
+          </footer>
+        </main>
+      </div>
+    </div>
+
+    <!-- =========================================
+         JAVASCRIPT FILES
+    ========================================== -->
+
+    <script src="../js/storage.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/settings.js" defer></script>
+  </body>
+</html>
